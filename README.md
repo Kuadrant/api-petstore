@@ -3,13 +3,13 @@
 ## Build
 
 ```bash
-docker build -t kuadrant/petstore3:latest .
+docker buildx build --platform linux/amd64,linux/arm64 -t quay.io/kuadrant/petstore3:1.0.0 --push .
 ```
 
 
 ## Run
 ```bash
-docker run  --name swaggerapi-petstore3 -d -p 8080:8080 kuadrant/petstore3:latest
+docker run --name swaggerapi-petstore3 -d -p 8080:8080 quay.io/kuadrant/petstore3:1.0.0
 ```
 
 
