@@ -1,0 +1,52 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: petstore-route
+  labels:
+    deployment: petstore
+spec:
+  parentRefs:
+  - kind: Gateway
+    name: prod-web
+    namespace: kuadrant-multi-cluster-gateways
+  hostnames:
+  - "petstore.stitch2.hcpapps.net"  
+  rules:
+  - backendRefs:
+    - name: petstore
+      port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: petstore
+spec:
+  ports:
+    - name: http-port
+      port: 8080
+      targetPort: http-port
+      protocol: TCP
+  selector:
+    app: petstore     
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petstore
+  template:
+    metadata:
+      labels:
+        app: petstore
+    spec:
+      containers:
+        - name: petstore
+          image: quay.io/kuadrant/petstore3:latest
+          ports:
+            - name: http-port
+              containerPort: 8080
+              protocol: TCP
