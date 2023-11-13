@@ -10,7 +10,7 @@ spec:
     name: prod-web
     namespace: kuadrant-multi-cluster-gateways
   hostnames:
-  - "petstore.stitch2.hcpapps.net"  
+  - "petstore.stitch1.hcpapps.net"
   rules:
   - backendRefs:
     - name: petstore
