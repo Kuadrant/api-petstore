@@ -15,6 +15,14 @@ spec:
   - backendRefs:
     - name: petstore
       port: 8080
+  - backendRefs:
+    - name: petstore
+      port: 8080
+    matches:
+      - method: GET
+        path:
+          type: PathPrefix
+          value: /api/v3/user/login
 ---
 apiVersion: v1
 kind: Service
@@ -51,3 +59,25 @@ spec:
             - name: http-port
               containerPort: 8080
               protocol: TCP
+---
+apiVersion: kuadrant.io/v1beta2
+kind: RateLimitPolicy
+metadata:
+  name: petstore
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: petstore-route
+  limits:
+    "login":
+      rates:
+      - limit: 3
+        duration: 10
+        unit: second
+      routeSelectors:
+      - matches:
+        - method: GET
+          path:
+            type: PathPrefix
+            value: "/api/v3/user/login"
