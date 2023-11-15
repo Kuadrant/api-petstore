@@ -48,26 +48,3 @@ spec:
         emptyDir:
           medium: Memory
           sizeLimit: "64Mi"
----
-apiVersion: kuadrant.io/v1beta2
-kind: RateLimitPolicy
-metadata:
-  name: petstore
-  namespace: petstore
-spec:
-  targetRef:
-    group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    name: petstore-route
-  limits:
-    "login":
-      rates:
-      - limit: 3
-        duration: 10
-        unit: second
-      routeSelectors:
-      - matches:
-        - method: GET
-          path:
-            type: PathPrefix
-            value: "/api/v3/user/login"
