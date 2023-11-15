@@ -3,6 +3,30 @@ openapi: 3.0.2
 info:
   title: Swagger Petstore - OpenAPI 3.0
   version: 1.0.18
+  x-kuadrant:
+    route:
+      name: "petstore-route"
+      namespace: "petstore"
+      labels:
+        deployment: petstore
+      hostnames:
+        - petstore.stitch1.hcpapps.net
+      parentRefs:
+        - name: prod-web
+          namespace: kuadrant-multi-cluster-gateways
+          kind: Gateway
+      rules:
+        - backendRefs:
+          - name: petstore
+            port: 8080
+        - backendRefs:
+          - name: petstore
+            port: 8080
+          matches:
+            - method: GET
+              path:
+                type: PathPrefix
+                value: /api/v3/user/login
   description: |-
     This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
     Swagger at [http://swagger.io](http://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
@@ -598,7 +622,7 @@ components:
           example: CA
         zip:
           type: string
-          example: 94301
+          example: "94301"
     Category:
       type: object
       properties:
@@ -631,10 +655,10 @@ components:
           example: john@email.com
         password:
           type: string
-          example: 12345
+          example: "12345"
         phone:
           type: string
-          example: 12345
+          example: "12345"
         userStatus:
           format: int32
           description: User Status

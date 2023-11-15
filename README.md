@@ -24,5 +24,8 @@ Here:
 ```bash
 kubectl apply -f resources/petstore.yaml
 kubectl wait --namespace=default --for=condition=available --timeout=300s deployment/petstore
+
+kuadrantctl generate gatewayapi httproute --oas src/main/resources/openapi.yaml | yq -P | kubectl apply -f -
+
 echo "Petstore API: https://$(kubectl get httproute petstore-route -n default -o jsonpath='{.spec.hostnames[0]}')"
 ```
