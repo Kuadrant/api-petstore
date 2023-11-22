@@ -3,7 +3,6 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: petstore-route
   namespace: petstore
-  creationTimestamp: null
   labels:
     deployment: petstore
     owner: cferreir
