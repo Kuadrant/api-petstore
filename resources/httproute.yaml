@@ -1,1 +1,55 @@
-
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: petstore-route
+  namespace: petstore
+  creationTimestamp: null
+  labels:
+    deployment: petstore
+    owner: cferreir
+spec:
+  parentRefs:
+    - kind: Gateway
+      namespace: kuadrant-multi-cluster-gateways
+      name: prod-web
+  hostnames:
+    - petstore.stitch1.hcpapps.net
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /pet
+          method: POST
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+    - matches:
+        - path:
+            type: Exact
+            value: /pet
+          method: PUT
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+    - matches:
+        - path:
+            type: Exact
+            value: /api/v3/user/login
+          method: GET
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+    - matches:
+        - path:
+            type: Exact
+            value: /api/v3/store/inventory
+          method: GET
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+status:
+  parents: null

@@ -1,1 +1,36 @@
-
+kind: RateLimitPolicy
+apiVersion: kuadrant.io/v1beta2
+metadata:
+  name: petstore-route
+  namespace: petstore
+  creationTimestamp: null
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: petstore-route
+    namespace: petstore
+  limits:
+    getInventory:
+      routeSelectors:
+        - matches:
+            - path:
+                type: Exact
+                value: /api/v3/store/inventory
+              method: GET
+      rates:
+        - limit: 3
+          duration: 10
+          unit: second
+    loginUser:
+      routeSelectors:
+        - matches:
+            - path:
+                type: Exact
+                value: /api/v3/user/login
+              method: GET
+      rates:
+        - limit: 3
+          duration: 10
+          unit: second
+status: {}
