@@ -13,4 +13,15 @@ patches:
       kind: HTTPRoute
       name: petstore-route
       namespace: petstore
-    path: httproute-patch.yaml
+    patch: |
+      - op: add
+        path: /spec/rules/-
+        value:
+          matches:
+            - path:
+                type: PathPrefix
+                value: /
+          backendRefs:
+            - name: petstore
+              namespace: petstore
+              port: 8080

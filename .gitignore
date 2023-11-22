@@ -1,3 +1,4 @@
+apply.sh
 build/
 lib/*.jar
 target
