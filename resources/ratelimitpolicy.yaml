@@ -16,7 +16,7 @@ spec:
         - matches:
             - path:
                 type: Exact
-                value: /v3/api/v3/store/inventory
+                value: /api/v3/store/inventory
               method: GET
       rates:
         - limit: 3
@@ -27,7 +27,7 @@ spec:
         - matches:
             - path:
                 type: Exact
-                value: /v3/api/v3/user/login
+                value: /api/v3/user/login
               method: GET
       rates:
         - limit: 1
