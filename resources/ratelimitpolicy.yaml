@@ -30,7 +30,7 @@ spec:
                 value: /api/v3/user/login
               method: GET
       rates:
-        - limit: 1
+        - limit: 3
           duration: 10
           unit: second
 status: {}
