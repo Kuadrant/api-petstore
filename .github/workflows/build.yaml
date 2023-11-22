@@ -1,0 +1,19 @@
+name: ci 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '^1.13.1'
+      - run: go version
+      - run: go install github.com/kuadrant/kuadrantctl@latest
+      - run: kuadrantctl version
