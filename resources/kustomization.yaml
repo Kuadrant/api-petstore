@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - httproute.yaml
+  - app.yaml
+  - ratelimitpolicy.yaml
 
 patches:
   - target:
