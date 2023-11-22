@@ -32,7 +32,7 @@ info:
         namespace: kuadrant-multi-cluster-gateways
         kind: Gateway
 servers:
-- url: /v3
+- url: /api/v3
 paths:
   /pet:
     put:
