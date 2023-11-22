@@ -9,6 +9,7 @@ info:
       namespace: "petstore"
       labels:
         deployment: petstore
+        owner: cferreir@redhat.com
       hostnames:
         - petstore.stitch1.hcpapps.net
       parentRefs:
