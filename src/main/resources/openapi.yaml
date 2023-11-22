@@ -577,7 +577,7 @@ paths:
         port: 8080
       rate_limit:
         rates:
-        - limit: 1
+        - limit: 3
           duration: 10
           unit: second
 components:
