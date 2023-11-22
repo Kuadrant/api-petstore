@@ -450,57 +450,6 @@ paths:
       summary: Creates list of users with given input array
       description: Creates list of users with given input array
       x-swagger-router-controller: UserController
-  /api/v3/user/login:
-    get:
-      tags:
-      - user
-      parameters:
-      - name: username
-        description: The user name for login
-        schema:
-          type: string
-        in: query
-        required: false
-      - name: password
-        description: The password for login in clear text
-        schema:
-          type: string
-        in: query
-        required: false
-      responses:
-        "200":
-          headers:
-            X-Rate-Limit:
-              schema:
-                format: int32
-                type: integer
-              description: calls per hour allowed by the user
-            X-Expires-After:
-              schema:
-                format: date-time
-                type: string
-              description: date in UTC when token expires
-          content:
-            application/json:
-              schema:
-                type: string
-          description: successful operation
-        "400":
-          description: Invalid username/password supplied
-      operationId: loginUser
-      summary: Logs user into the system
-      description: ""
-    x-kuadrant:
-      enable: true
-      backendRefs:
-      - name: petstore
-        namespace: petstore
-        port: 8080
-      rate_limit:
-        rates:
-        - limit: 3
-          duration: 10
-          unit: second
   /user/logout:
     get:
       tags:
@@ -580,6 +529,57 @@ paths:
       operationId: deleteUser
       summary: Delete user
       description: This can only be done by the logged in user.
+  /api/v3/user/login:
+    get:
+      tags:
+      - user
+      parameters:
+      - name: username
+        description: The user name for login
+        schema:
+          type: string
+        in: query
+        required: false
+      - name: password
+        description: The password for login in clear text
+        schema:
+          type: string
+        in: query
+        required: false
+      responses:
+        "200":
+          headers:
+            X-Rate-Limit:
+              schema:
+                format: int32
+                type: integer
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              schema:
+                format: date-time
+                type: string
+              description: date in UTC when token expires
+          content:
+            application/json:
+              schema:
+                type: string
+          description: successful operation
+        "400":
+          description: Invalid username/password supplied
+      operationId: loginUser
+      summary: Logs user into the system
+      description: ""
+    x-kuadrant:
+      enable: true
+      backendRefs:
+      - name: petstore
+        namespace: petstore
+        port: 8080
+      rate_limit:
+        rates:
+        - limit: 1
+          duration: 10
+          unit: second
 components:
   schemas:
     Order:
