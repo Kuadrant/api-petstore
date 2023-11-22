@@ -21,11 +21,11 @@ jobs:
       - run: kuadrantctl version
       - run: kuadrantctl generate kuadrant ratelimitpolicy --oas src/main/resources/openapi.yaml | yq -P > resources/ratelimitpolicy.yaml
       - run: kuadrantctl generate gatewayapi httproute --oas src/main/resources/openapi.yaml | yq -P > resources/httproute.yaml
-      - name: 'Kustomize Build'
-        uses: karancode/kustomize-github-action@master
-        with:
-          kustomize_version: '4.5.4'
-          kustomize_build_dir: 'resources'
+      # - name: 'Kustomize Build'
+      #   uses: karancode/kustomize-github-action@master
+      #   with:
+      #     kustomize_version: '4.5.4'
+      #     kustomize_build_dir: 'resources'
       - name: Update resources
         uses: test-room-7/action-update-file@v1
         with:
