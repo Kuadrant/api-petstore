@@ -3,6 +3,19 @@ openapi: 3.0.2
 info:
   title: Swagger Petstore - OpenAPI 3.0
   version: 1.0.18
+  x-kuadrant:
+    route:
+      name: "petstore-route"
+      namespace: "petstore"
+      labels:
+        deployment: petstore
+        owner: cferreir@redhat.com
+      hostnames:
+        - petstore.stitch1.hcpapps.net
+      parentRefs:
+        - name: prod-web
+          namespace: kuadrant-multi-cluster-gateways
+          kind: Gateway
   description: |-
     This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
     Swagger at [http://swagger.io](http://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
@@ -22,6 +35,12 @@ servers:
 - url: /v3
 paths:
   /pet:
+    x-kuadrant:
+      enable: true
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
     put:
       requestBody:
         description: Update an existent pet in the store
@@ -84,7 +103,7 @@ paths:
       operationId: addPet
       summary: Add a new pet to the store
       description: Add a new pet to the store
-  /pet/findByStatus:
+  /api/v3/pet/findByStatus:
     get:
       tags:
       - pet
@@ -279,8 +298,19 @@ paths:
       operationId: uploadFile
       summary: uploads an image
       description: ""
-  /store/inventory:
+  /api/v3/store/inventory:
     get:
+      x-kuadrant:
+        enable: true
+        backendRefs:
+          - name: petstore
+            namespace: petstore
+            port: 8080
+        rate_limit:
+          rates:
+            - limit: 3
+              duration: 10
+              unit: second
       tags:
       - store
       responses:
@@ -420,7 +450,18 @@ paths:
       summary: Creates list of users with given input array
       description: Creates list of users with given input array
       x-swagger-router-controller: UserController
-  /user/login:
+  /api/v3/user/login:
+    x-kuadrant:
+      enable: true
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+      rate_limit:
+        rates:
+          - limit: 3
+            duration: 10
+            unit: second
     get:
       tags:
       - user
@@ -598,7 +639,7 @@ components:
           example: CA
         zip:
           type: string
-          example: 94301
+          example: "94301"
     Category:
       type: object
       properties:
@@ -631,10 +672,10 @@ components:
           example: john@email.com
         password:
           type: string
-          example: 12345
+          example: "12345"
         phone:
           type: string
-          example: 12345
+          example: "12345"
         userStatus:
           format: int32
           description: User Status

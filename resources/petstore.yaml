@@ -1,33 +1,13 @@
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: HTTPRoute
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: petstore-route
-  labels:
-    deployment: petstore
-spec:
-  parentRefs:
-  - kind: Gateway
-    name: prod-web
-    namespace: kuadrant-multi-cluster-gateways
-  hostnames:
-  - "petstore.stitch1.hcpapps.net"
-  rules:
-  - backendRefs:
-    - name: petstore
-      port: 8080
-  - backendRefs:
-    - name: petstore
-      port: 8080
-    matches:
-      - method: GET
-        path:
-          type: PathPrefix
-          value: /api/v3/user/login
+  name: petstore
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: petstore
+  namespace: petstore
 spec:
   ports:
     - name: http-port
@@ -41,6 +21,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: petstore
+  namespace: petstore
 spec:
   replicas: 1
   selector:
@@ -52,32 +33,18 @@ spec:
         app: petstore
     spec:
       containers:
-        - name: petstore
-          image: quay.io/kuadrant/petstore3:1.0.0
-          imagePullPolicy: Always
-          ports:
-            - name: http-port
-              containerPort: 8080
-              protocol: TCP
----
-apiVersion: kuadrant.io/v1beta2
-kind: RateLimitPolicy
-metadata:
-  name: petstore
-spec:
-  targetRef:
-    group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    name: petstore-route
-  limits:
-    "login":
-      rates:
-      - limit: 3
-        duration: 10
-        unit: second
-      routeSelectors:
-      - matches:
-        - method: GET
-          path:
-            type: PathPrefix
-            value: "/api/v3/user/login"
+      - name: petstore
+        image: quay.io/kuadrant/petstore3:1.0.0
+        imagePullPolicy: Always
+        ports:
+          - name: http-port
+            containerPort: 8080
+            protocol: TCP
+        volumeMounts:
+        - name: log-volume
+          mountPath: /var/log
+      volumes:
+      - name: log-volume
+        emptyDir:
+          medium: Memory
+          sizeLimit: "64Mi"
