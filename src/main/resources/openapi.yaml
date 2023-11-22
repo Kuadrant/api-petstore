@@ -103,7 +103,7 @@ paths:
       - name: petstore
         namespace: petstore
         port: 8080
-  /api/v3/pet/findByStatus:
+  /pet/findByStatus:
     get:
       tags:
       - pet
@@ -298,7 +298,7 @@ paths:
       operationId: uploadFile
       summary: uploads an image
       description: ""
-  /api/v3/store/inventory:
+  /store/inventory:
     get:
       tags:
       - store
@@ -529,7 +529,7 @@ paths:
       operationId: deleteUser
       summary: Delete user
       description: This can only be done by the logged in user.
-  /api/v3/user/login:
+  /user/login:
     get:
       tags:
       - user
