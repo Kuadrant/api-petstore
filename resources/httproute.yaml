@@ -18,7 +18,7 @@ spec:
     - matches:
         - path:
             type: Exact
-            value: /api/v3/user/login
+            value: /v3/api/v3/store/inventory
           method: GET
       backendRefs:
         - name: petstore
@@ -27,7 +27,7 @@ spec:
     - matches:
         - path:
             type: Exact
-            value: /api/v3/store/inventory
+            value: /v3/api/v3/user/login
           method: GET
       backendRefs:
         - name: petstore
@@ -36,7 +36,7 @@ spec:
     - matches:
         - path:
             type: Exact
-            value: /pet
+            value: /v3/pet
           method: POST
       backendRefs:
         - name: petstore
@@ -45,7 +45,7 @@ spec:
     - matches:
         - path:
             type: Exact
-            value: /pet
+            value: /v3/pet
           method: PUT
       backendRefs:
         - name: petstore
