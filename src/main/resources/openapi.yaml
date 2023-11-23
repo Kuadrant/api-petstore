@@ -546,7 +546,7 @@ paths:
         port: 8080
       rate_limit:
         rates:
-        - limit: 3
+        - limit: 10
           duration: 10
           unit: second
   /store/inventory:
@@ -576,7 +576,7 @@ paths:
           port: 8080
         rate_limit:
           rates:
-          - limit: 20
+          - limit: 10
             duration: 10
             unit: second
       x-swagger-router-controller: OrderController
