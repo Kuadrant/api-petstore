@@ -18,6 +18,15 @@ spec:
     - matches:
         - path:
             type: Exact
+            value: /api/v3/store/inventory
+          method: GET
+      backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+    - matches:
+        - path:
+            type: Exact
             value: /api/v3/pet
           method: POST
       backendRefs:
@@ -29,15 +38,6 @@ spec:
             type: Exact
             value: /api/v3/pet
           method: PUT
-      backendRefs:
-        - name: petstore
-          namespace: petstore
-          port: 8080
-    - matches:
-        - path:
-            type: Exact
-            value: /api/v3/store/inventory
-          method: GET
       backendRefs:
         - name: petstore
           namespace: petstore
