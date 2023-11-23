@@ -19,7 +19,7 @@ spec:
       project: default
       source:
         repoURL: git@github.com:Kuadrant/api-poc-petstore.git
-        targetRevision: main
+        targetRevision: release
         path: resources
       destination:
         name: '{{clusterName}}' # 'server' field of the secret
