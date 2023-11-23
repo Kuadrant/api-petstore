@@ -298,37 +298,6 @@ paths:
       operationId: uploadFile
       summary: uploads an image
       description: ""
-  /store/inventory:
-    get:
-      tags:
-      - store
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties:
-                  format: int32
-                  type: integer
-          description: successful operation
-      security:
-      - api_key: []
-      operationId: getInventory
-      summary: Returns pet inventories by status
-      description: Returns a map of status codes to quantities
-      x-kuadrant:
-        enable: true
-        backendRefs:
-        - name: petstore
-          namespace: petstore
-          port: 8080
-        rate_limit:
-          rates:
-          - limit: 3
-            duration: 10
-            unit: second
-      x-swagger-router-controller: OrderController
   /store/order:
     post:
       requestBody:
@@ -580,6 +549,37 @@ paths:
         - limit: 3
           duration: 10
           unit: second
+  /store/inventory:
+    get:
+      tags:
+      - store
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  format: int32
+                  type: integer
+          description: successful operation
+      security:
+      - api_key: []
+      operationId: getInventory
+      summary: Returns pet inventories by status
+      description: Returns a map of status codes to quantities
+      x-kuadrant:
+        enable: true
+        backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
+        rate_limit:
+          rates:
+          - limit: 20
+            duration: 10
+            unit: second
+      x-swagger-router-controller: OrderController
 components:
   schemas:
     Order:
