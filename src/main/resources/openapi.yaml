@@ -546,7 +546,7 @@ paths:
         port: 8080
       rate_limit:
         rates:
-        - limit: 2
+        - limit: 10
           duration: 10
           unit: second
   /store/inventory:
