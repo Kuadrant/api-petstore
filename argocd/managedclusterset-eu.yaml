@@ -1,10 +1,10 @@
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSet
 metadata:
-  name: petstore-region-us
+  name: petstore-region-eu
 spec:
   clusterSelector:
     labelSelector:
       matchLabels:
-        region: "us"
+        kuadrant.io/lb-attribute-geo-code: EU
     selectorType: LabelSelector
