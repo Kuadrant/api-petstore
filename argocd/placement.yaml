@@ -6,4 +6,4 @@ metadata:
 spec:
   clusterSets:
   - petstore-region-eu
-  numberOfClusters: 1
+  numberOfClusters: 0
