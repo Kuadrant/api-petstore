@@ -1,6 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
+  labels:
+    app: petstore
   name: petstore
   namespace: argocd
 spec:
@@ -14,6 +16,8 @@ spec:
       requeueAfterSeconds: 60
   template:
     metadata:
+      labels:
+        app: petstore
       name: '{{name}}-petstore'
     spec:
       project: default
