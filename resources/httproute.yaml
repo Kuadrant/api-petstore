@@ -33,23 +33,5 @@ spec:
         - name: petstore
           namespace: petstore
           port: 8080
-    - matches:
-        - path:
-            type: Exact
-            value: /api/v3/pet
-          method: POST
-      backendRefs:
-        - name: petstore
-          namespace: petstore
-          port: 8080
-    - matches:
-        - path:
-            type: Exact
-            value: /api/v3/pet
-          method: PUT
-      backendRefs:
-        - name: petstore
-          namespace: petstore
-          port: 8080
 status:
   parents: null
