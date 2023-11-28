@@ -58,3 +58,8 @@ app.listen(port, () => {
   console.log(`Petstore API server listening at http://localhost:${port}`);
   console.log(`Swagger UI Docs: http://localhost:${port}/docs/`);
 });
+
+process.on('SIGINT', function() {
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+  process.exit(1);
+});
