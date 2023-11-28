@@ -63,9 +63,6 @@ paths:
         "400":
           description: Invalid status value
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
       operationId: findPetsByStatus
       summary: Finds Pets by status
       description: Multiple status values can be provided with comma separated strings
@@ -135,7 +132,6 @@ paths:
                   type: integer
           description: successful operation
       security:
-      - api_key: []
       operationId: getInventory
       summary: Returns pet inventories by status
       description: Returns a map of status codes to quantities
@@ -150,7 +146,30 @@ paths:
           - limit: 10
             duration: 10
             unit: second
-      x-swagger-router-controller: OrderController
+  /store/admin:
+    get:
+      tags:
+      - store
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: successful operation
+        405:
+          description: "invalid input"
+      security:
+      - api_key: []
+      operationId: storeAdmin
+      summary: Returns admin data
+      description: Returns admin data
+      x-kuadrant:
+        enable: true
+        backendRefs:
+        - name: petstore
+          namespace: petstore
+          port: 8080
 components:
   schemas:
     Order:
@@ -319,14 +338,6 @@ components:
             items:
               $ref: '#/components/schemas/User'
   securitySchemes:
-    petstore_auth:
-      flows:
-        implicit:
-          authorizationUrl: https://petstore.swagger.io/oauth/authorize
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
-      type: oauth2
     api_key:
       type: apiKey
       name: api_key

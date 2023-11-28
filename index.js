@@ -82,6 +82,13 @@ app.get('/api/v3/store/inventory', (req, res) => {
   res.status(200).json(inventory);
 });
 
+app.get('/api/v3/store/admin', (req, res) => {
+  const msg = {
+    message: 'You are an admin!'
+  };
+  res.status(200).json(msg);
+});
+
 
 app.listen(port, () => {
   console.log(`Petstore API server listening at http://localhost:${port}`);
