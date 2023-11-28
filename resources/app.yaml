@@ -40,11 +40,9 @@ spec:
           - name: http-port
             containerPort: 8080
             protocol: TCP
-        volumeMounts:
-        - name: log-volume
-          mountPath: /var/log
-      volumes:
-      - name: log-volume
-        emptyDir:
-          medium: Memory
-          sizeLimit: "64Mi"
+        env:
+          - name: REGION
+            valueFrom:
+              configMapKeyRef:
+                name: cluster-config
+                key: REGION
