@@ -7,18 +7,18 @@
 docker buildx create --name mybuilder --use
 docker buildx inspect --bootstrap
 
-docker buildx build --platform linux/amd64,linux/arm64 -t quay.io/kuadrant/petstore3:1.0.4 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t quay.io/kuadrant/petstore3:1.0.5 --push .
 ```
 
 ### Local build
 ```bash
-docker buildx build --load --platform linux/arm64 -t quay.io/kuadrant/petstore3:1.0.4 .
+docker buildx build --load --platform linux/arm64 -t quay.io/kuadrant/petstore3:1.0.5 .
 ```
 
 ## Run
 
 ```bash
-docker run --name swaggerapi-petstore3 -p 8080:8080 quay.io/kuadrant/petstore3:1.0.4
+docker run --name swaggerapi-petstore3 -p 8080:8080 quay.io/kuadrant/petstore3:1.0.5
 ```
 
 
