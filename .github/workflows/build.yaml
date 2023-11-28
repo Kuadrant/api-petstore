@@ -20,8 +20,8 @@ jobs:
           tag: v0.2.0-alpha.4
           cache: enable
       - run: kuadrantctl version
-      - run: kuadrantctl generate kuadrant ratelimitpolicy --oas src/main/resources/openapi.yaml | yq -P > resources/ratelimitpolicy.yaml
-      - run: kuadrantctl generate gatewayapi httproute --oas src/main/resources/openapi.yaml | yq -P > resources/httproute.yaml
+      - run: kuadrantctl generate kuadrant ratelimitpolicy --oas openapi.yaml | yq -P > resources/ratelimitpolicy.yaml
+      - run: kuadrantctl generate gatewayapi httproute --oas openapi.yaml | yq -P > resources/httproute.yaml
       - name: Update resources
         uses: test-room-7/action-update-file@v1
         with:
