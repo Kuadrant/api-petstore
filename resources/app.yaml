@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: petstore
-        image: quay.io/kuadrant/petstore3:1.0.5
+        image: quay.io/kuadrant/petstore3:1.0.6
         imagePullPolicy: Always
         ports:
           - name: http-port

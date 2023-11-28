@@ -7,18 +7,19 @@
 docker buildx create --name mybuilder --use
 docker buildx inspect --bootstrap
 
-docker buildx build --platform linux/amd64,linux/arm64 -t quay.io/kuadrant/petstore3:1.0.5 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t quay.io/kuadrant/petstore3:1.0.6 --push .
+# also update resources/app.yaml
 ```
 
 ### Local build
 ```bash
-docker buildx build --load --platform linux/arm64 -t quay.io/kuadrant/petstore3:1.0.5 .
+docker buildx build --load --platform linux/arm64 -t quay.io/kuadrant/petstore3:1.0.6 .
 ```
 
 ## Run
 
 ```bash
-docker run --name swaggerapi-petstore3 -p 8080:8080 quay.io/kuadrant/petstore3:1.0.5
+docker run --name swaggerapi-petstore3 -p 8080:8080 quay.io/kuadrant/petstore3:1.0.6
 ```
 
 
@@ -33,8 +34,8 @@ Here:
 ```bash
 kubectl apply -f resources/app.yaml
 kubectl wait --namespace=default --for=condition=available --timeout=300s deployment/petstore
-kuadrantctl generate gatewayapi httproute --oas src/main/resources/openapi.yaml | kubectl apply -f -
-kuadrantctl generate kuadrant ratelimitpolicy --oas src/main/resources/openapi.yaml | kubectl apply -f -
+kuadrantctl generate gatewayapi httproute --oas openapi.yaml | kubectl apply -f -
+kuadrantctl generate kuadrant ratelimitpolicy --oas openapi.yaml | kubectl apply -f -
 echo "Petstore API: https://$(kubectl get httproute petstore-route -n default -o jsonpath='{.spec.hostnames[0]}')"
 ```
 
