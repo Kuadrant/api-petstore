@@ -13,7 +13,11 @@ app.use(express.json());
 
 const file = fs.readFileSync('./openapi.yaml', 'utf8')
 const swaggerDocument = YAML.parse(file)
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get('/', function (req, res) {
+  res.redirect('/docs');
+});
 
 let pets = [
   { id: 1, name: 'Max', type: 'Dog', status: 'available' },
