@@ -50,10 +50,10 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: api-key
+  name: petstoreApiKey
   labels:
     authorino.kuadrant.io/managed-by: authorino
-    kuadrant.io/apikeys-by: api-key
+    kuadrant.io/apikeys-by: api_key
 stringData:
   api_key: secret
 type: Opaque
