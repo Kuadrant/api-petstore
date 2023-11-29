@@ -35,6 +35,8 @@ servers:
 - url: /api/v3
 paths:
   /pet/findByStatus:
+    x-kuadrant:
+      disable: true
     get:
       tags:
       - pet
@@ -107,7 +109,6 @@ paths:
       summary: Logs user into the system
       description: ""
     x-kuadrant:
-      enable: true
       backendRefs:
       - name: petstore
         namespace: petstore
@@ -136,7 +137,6 @@ paths:
       summary: Returns pet inventories by status
       description: Returns a map of status codes to quantities
       x-kuadrant:
-        enable: true
         backendRefs:
         - name: petstore
           namespace: petstore
@@ -165,7 +165,6 @@ paths:
       summary: Returns admin data
       description: Returns admin data
       x-kuadrant:
-        enable: true
         backendRefs:
         - name: petstore
           namespace: petstore
