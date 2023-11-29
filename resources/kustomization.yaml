@@ -5,6 +5,7 @@ resources:
   - httproute.yaml
   - app.yaml
   - ratelimitpolicy.yaml
+  - authpolicy.yaml
 
 patches:
   - target:
