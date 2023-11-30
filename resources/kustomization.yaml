@@ -12,7 +12,7 @@ patches:
       group: gateway.networking.k8s.io
       version: v1beta1
       kind: HTTPRoute
-      name: petstore-route
+      name: petstore
       namespace: petstore
     patch: |
       - op: add
