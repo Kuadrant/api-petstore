@@ -36,7 +36,7 @@ kubectl apply -f resources/app.yaml
 kubectl wait --namespace=default --for=condition=available --timeout=300s deployment/petstore
 kuadrantctl generate gatewayapi httproute --oas openapi.yaml | kubectl apply -f -
 kuadrantctl generate kuadrant ratelimitpolicy --oas openapi.yaml | kubectl apply -f -
-echo "Petstore API: https://$(kubectl get httproute petstore-route -n default -o jsonpath='{.spec.hostnames[0]}')"
+echo "Petstore API: https://$(kubectl get httproute petstore -n default -o jsonpath='{.spec.hostnames[0]}')"
 ```
 
 ## Creating the ApplicationSet & placment resource in ArgoCD

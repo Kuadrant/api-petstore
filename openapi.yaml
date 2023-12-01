@@ -20,7 +20,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   x-kuadrant:
     route:
-      name: petstore-route
+      name: petstore
       namespace: petstore
       labels:
         deployment: petstore
