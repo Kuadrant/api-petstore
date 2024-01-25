@@ -10,10 +10,10 @@ metadata:
 spec:
   parentRefs:
     - kind: Gateway
-      namespace: kuadrant-multi-cluster-gateways
+      namespace: multi-cluster-gateways
       name: prod-web
   hostnames:
-    - petstore.stitch1.hcpapps.net
+    - petstore.$KUADRANT_ZONE_ROOT_DOMAIN
   rules:
     - matches:
         - path:
