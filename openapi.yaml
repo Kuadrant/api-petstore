@@ -24,9 +24,9 @@ info:
       namespace: petstore
       labels:
         deployment: petstore
-        owner: cferreir
+        owner: jbloggs
       hostnames:
-      - petstore.stitch1.hcpapps.net
+      - petstore.${KUADRANT_ZONE_ROOT_DOMAIN}
       parentRefs:
       - name: prod-web
         namespace: kuadrant-multi-cluster-gateways

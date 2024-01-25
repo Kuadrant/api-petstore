@@ -2,27 +2,24 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - httproute.yaml
   - app.yaml
-  - ratelimitpolicy.yaml
-  - authpolicy.yaml
 
-patches:
-  - target:
-      group: gateway.networking.k8s.io
-      version: v1beta1
-      kind: HTTPRoute
-      name: petstore
-      namespace: petstore
-    patch: |
-      - op: add
-        path: /spec/rules/-
-        value:
-          matches:
-            - path:
-                type: PathPrefix
-                value: /
-          backendRefs:
-            - name: petstore
-              namespace: petstore
-              port: 8080
+# patches:
+#   - target:
+#       group: gateway.networking.k8s.io
+#       version: v1beta1
+#       kind: HTTPRoute
+#       name: petstore
+#       namespace: petstore
+#     patch: |
+#       - op: add
+#         path: /spec/rules/-
+#         value:
+#           matches:
+#             - path:
+#                 type: PathPrefix
+#                 value: /
+#           backendRefs:
+#             - name: petstore
+#               namespace: petstore
+#               port: 8080

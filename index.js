@@ -13,9 +13,17 @@ const port = 8080;
 app.use(express.json());
 app.use('/static', express.static('static'));
 
-const file = fs.readFileSync('./openapi.yaml', 'utf8')
-const swaggerDocument = YAML.parse(file)
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const file = fs.readFileSync('./openapi.yaml', 'utf8');
+const swaggerDocument = YAML.parse(file);
+
+var options = {
+  swaggerOptions: {
+    showExtensions: true
+  }
+};
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+
 
 app.get('/', function(req, res) {
   res.redirect('/docs');
