@@ -22,7 +22,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: git@github.com:Kuadrant/api-poc-petstore.git
+        repoURL: git@github.com:Kuadrant/api-petstore.git
         targetRevision: release
         path: resources
       destination:

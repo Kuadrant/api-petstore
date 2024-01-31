@@ -1,10 +1,11 @@
-# API PoC - API Impl + OAS Spec
+# API Petstore - API Impl + OAS Spec
 
 ## Build
 
 ```bash
 # Multiarch with buildx
 docker buildx create --name mybuilder --use
+
 docker buildx inspect --bootstrap
 
 docker buildx build --platform linux/amd64,linux/arm64 -t quay.io/kuadrant/petstore3:1.0.x --push .
@@ -33,19 +34,23 @@ Here:
 
 ```bash
 kubectl apply -f resources/app.yaml
+
 kubectl wait --namespace=default --for=condition=available --timeout=300s deployment/petstore
+
 kuadrantctl generate gatewayapi httproute --oas openapi.yaml | kubectl apply -f -
+
 kuadrantctl generate kuadrant ratelimitpolicy --oas openapi.yaml | kubectl apply -f -
-echo "Petstore API: https://$(kubectl get httproute petstore -n default -o jsonpath='{.spec.hostnames[0]}')"
+
+echo "Petstore API: https://$(kubectl get httproute petstore -n default -o jsonpath='{.spec.hostnames[0]}')" 
 ```
 
-## Creating the ApplicationSet & placment resource in ArgoCD
+## Creating the ApplicationSet & placement resource in ArgoCD
 
 ```bash
 kubectl -n argocd apply -f argocd/
 ```
 
-## Scaling up the ApplicationSet to 2 clusters
+## Scaling up the ApplicationSet to 2 clusters
 
 This actually does 2 things:
 
